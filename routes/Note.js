@@ -9,7 +9,6 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', getUser, async (req, res) => {
-    const user = req.user;
     let notes = await getAllPublicNotes();
     res.json(notes);
 })
