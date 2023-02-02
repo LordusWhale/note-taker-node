@@ -90,7 +90,6 @@ function register() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.message) {
           $("#error").text(data.message);
         } else {
