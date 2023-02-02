@@ -1,3 +1,4 @@
+import { init } from "./user.js";
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -28,6 +29,7 @@ let activeNote = {};
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
+    credentials: "include",
     headers: {
       'Content-Type': 'application/json',
     },
@@ -36,6 +38,7 @@ const getNotes = () =>
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
+    credentials: "include",
     headers: {
       'Content-Type': 'application/json',
     },
@@ -45,6 +48,7 @@ const saveNote = (note) =>
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
+    credentials: "include",
     headers: {
       'Content-Type': 'application/json',
     },
@@ -178,6 +182,7 @@ if (window.location.pathname === '/notes') {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
+  init();
 }
 
 getAndRenderNotes();
