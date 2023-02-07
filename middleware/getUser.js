@@ -12,20 +12,20 @@ async function getUser(req, res, next) {
 
   const { user: refresh } =
     expired && refreshToken ? verifyJwt(refreshToken) : { user: null };
-
   if (!refresh) {
     return next();
   }
   const session = await getSession(refresh.sessionId);
+
   if (!session) {
     return next();
   }
 
   const newToken = signJwt(session, "10h");
-
   res.cookie("authToken", newToken, {
     httpOnly: true,
-    sameSite: 'strict'
+    sameSite: 'strict',
+    signed: true
   });
   req.user = verifyJwt(newToken).user;
   return next();
